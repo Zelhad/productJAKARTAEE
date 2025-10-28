@@ -1,0 +1,31 @@
+# Git ignore for Java web app 
+# Build output
+/build/
+target/
+out/
+
+# Compiled class files
+*.class
+
+# Log files
+*.log
+
+# IDE and project settings
+.settings/
+.classpath
+.project
+*.iml
+.idea/
+
+# Temporary files
+*.tmp
+*.bak
+*.swp
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Maven or Gradle caches
+.mvn/
+.gradle/
