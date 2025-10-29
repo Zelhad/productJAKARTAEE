@@ -27,45 +27,36 @@ public class PRODUCTDAO {
 	private Connection getConnection() throws SQLException {
 		return DriverManager.getConnection(jdbcURL, jdbcUsername, jdbcPassword);
 	}
-	
-	//Insert insert a product
-	public    void insertProduct(Product product) {
-		
+
+	// Insert insert a product
+	public void insertProduct(Product product) {
+
 		/*
-	
-| href                
-| description       
-| name                
-| is_bundle           
-| is_customer_visible 
-| order_date  
+		 * 
+		 * | href | description | name | is_bundle | is_customer_visible | order_date
 		 */
 		String query = "INSERT INTO products(href, description, name, is_bundle,is_customer_visible, order_date) "
 				+ "values(?, ?, ?, ?, ?, ?)";
-		try(Connection conn = getConnection() ; 
-				PreparedStatement stmt = conn.prepareStatement(query);
-				) {
-			stmt.setString(1,product.getHref());
+		try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(query);) {
+			stmt.setString(1, product.getHref());
 			stmt.setString(2, product.getDescription());
 			stmt.setString(3, product.getName());
 			stmt.setBoolean(4, product.isBundle());
 			stmt.setBoolean(5, product.isCustomerVisible());
-			
-			if(product.getOrderDate() == null) {
+
+			if (product.getOrderDate() == null) {
 				stmt.setTimestamp(6, new Timestamp(System.currentTimeMillis()));
 			} else {
 				stmt.setTimestamp(6, Timestamp.from(product.getOrderDate().toInstant()));
 			}
-			
-			//System.out.println(stmt.toString());
+
+			// System.out.println(stmt.toString());
 			int rows = stmt.executeUpdate();
-			  System.out.println("Rows inserted: " + rows);
-			
-		}catch(SQLException e) {
+			System.out.println("Rows inserted: " + rows);
+
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 	}
-	
-
 
 }
