@@ -4,19 +4,20 @@ import java.time.OffsetDateTime;
 
 public class Product {
 	private String id;
-	private String href; 
-	private String  description;
+	private String href;
+	private String description;
 	private boolean isBundle;
-	private boolean isCustomerVisible; 
-	private String name ; 
-	private OffsetDateTime  orderDate;
-	
-	public Product() {}
-	
-	public Product( String href, String description, boolean isBundle, boolean isCustomerVisible, String name, 
+	private boolean isCustomerVisible;
+	private String name;
+	private OffsetDateTime orderDate;
+
+	public Product() {
+	}
+
+	public Product(String href, String description, boolean isBundle, boolean isCustomerVisible, String name,
 			OffsetDateTime orderDate) {
 		this.href = href;
-		this.description = description; 
+		this.description = description;
 		this.isBundle = isBundle;
 		this.isCustomerVisible = isCustomerVisible;
 		this.orderDate = orderDate;
@@ -77,6 +78,5 @@ public class Product {
 	public void setOrderDate(OffsetDateTime orderDate) {
 		this.orderDate = orderDate;
 	}
-	
 
 }
