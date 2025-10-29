@@ -13,7 +13,7 @@ public class PRODUCTDAO {
 	private String jdbcURL = "jdbc:mysql://localhost:3306/productdb?useSSL=false";
 	private String jdbcUsername = "root";
 	private String jdbcPassword = "admin";
-	private String jdbcDriver = "com.mysql.cj.jdbc.Driver";
+
 
 	// Load the driver (otptional for new Mysql versions)
 	static {
