@@ -8,12 +8,14 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import productPackage.model.Product;
 
+import java.util.List;
+import java.util.ArrayList;
+
 public class PRODUCTDAO {
 
 	private String jdbcURL = "jdbc:mysql://localhost:3306/productdb?useSSL=false";
 	private String jdbcUsername = "root";
 	private String jdbcPassword = "admin";
-
 
 	// Load the driver (otptional for new Mysql versions)
 	static {
@@ -31,10 +33,6 @@ public class PRODUCTDAO {
 	// Insert insert a product
 	public void insertProduct(Product product) {
 
-		/*
-		 * 
-		 * | href | description | name | is_bundle | is_customer_visible | order_date
-		 */
 		String query = "INSERT INTO products(href, description, name, is_bundle,is_customer_visible, order_date) "
 				+ "values(?, ?, ?, ?, ?, ?)";
 		try (Connection conn = getConnection(); PreparedStatement stmt = conn.prepareStatement(query);) {
@@ -50,7 +48,6 @@ public class PRODUCTDAO {
 				stmt.setTimestamp(6, Timestamp.from(product.getOrderDate().toInstant()));
 			}
 
-			// System.out.println(stmt.toString());
 			int rows = stmt.executeUpdate();
 			System.out.println("Rows inserted: " + rows);
 
@@ -58,5 +55,10 @@ public class PRODUCTDAO {
 			e.printStackTrace();
 		}
 	}
+
+public boolean updateProduct(Product product) {
+	return true;
+	
+}
 
 }
