@@ -5,7 +5,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Delete Product | ProductHub</title>
+    <title>Find Product | ProductHub</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         /* ====== Shopify Enhanced Variables ====== */
@@ -13,9 +13,9 @@
             --primary: #008060;
             --primary-hover: #006e52;
             --primary-light: #e3fcef;
+            --secondary: #637381;
+            --secondary-hover: #454f5b;
             --danger: #d72c0d;
-            --danger-hover: #bf2610;
-            --danger-light: #fef2f2;
             --success: #36b37e;
             --warning: #ffab00;
             --light-bg: #f6f6f7;
@@ -119,7 +119,7 @@
         .main-content {
             flex: 1;
             padding: 2rem;
-            max-width: 600px;
+            max-width: 800px;
             margin: 0 auto;
             width: 100%;
         }
@@ -166,7 +166,10 @@
         .search-icon {
             font-size: 3rem;
             margin-bottom: 1rem;
-            color: var(--danger);
+            background: var(--primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
         }
 
         .search-title {
@@ -206,14 +209,8 @@
 
         .form-control:focus {
             outline: none;
-            border-color: var(--danger);
-            box-shadow: 0 0 0 1px var(--danger);
-        }
-
-        .form-control:read-only {
-            background: #f8f9fa;
-            color: var(--text-light);
-            cursor: not-allowed;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 1px var(--primary);
         }
 
         .help-text {
@@ -249,20 +246,9 @@
             transform: translateY(-1px);
         }
 
-        .btn-danger {
-            background: var(--danger);
-            color: white;
-            width: 100%;
-        }
-
-        .btn-danger:hover {
-            background: var(--danger-hover);
-            transform: translateY(-1px);
-        }
-
         .btn-secondary {
             background: transparent;
-            color: var(--text-light);
+            color: var(--secondary);
             border: 1px solid var(--border);
         }
 
@@ -271,10 +257,13 @@
             color: var(--text);
         }
 
-        .button-group {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
+        .btn-success {
+            background: var(--success);
+            color: white;
+        }
+
+        .btn-success:hover {
+            background: #2e9b6d;
         }
 
         /* ====== Messages ====== */
@@ -301,12 +290,6 @@
             color: #dc2626;
         }
 
-        .warning-message {
-            background: #fffbeb;
-            border-color: #fef3c7;
-            color: #92400e;
-        }
-
         /* ====== Product Details ====== */
         .product-card {
             background: white;
@@ -315,7 +298,7 @@
             padding: 2rem;
             margin-top: 2rem;
             box-shadow: var(--shadow);
-            border-left: 4px solid var(--danger);
+            border-left: 4px solid var(--success);
         }
 
         .product-header {
@@ -336,8 +319,8 @@
         .product-id {
             font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
             font-size: 0.875rem;
-            color: var(--danger);
-            background: var(--danger-light);
+            color: var(--primary);
+            background: var(--primary-light);
             padding: 0.25rem 0.5rem;
             border-radius: var(--radius);
         }
@@ -398,33 +381,12 @@
             border-color: #d1d5db;
         }
 
-        /* ====== Confirmation Dialog ====== */
-        .confirmation-dialog {
-            background: var(--danger-light);
-            border: 1px solid #fecaca;
-            border-radius: var(--radius-lg);
-            padding: 2rem;
-            margin: 2rem 0;
-            text-align: center;
-        }
-
-        .confirmation-icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: var(--danger);
-        }
-
-        .confirmation-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-            color: var(--danger);
-            margin-bottom: 0.5rem;
-        }
-
-        .confirmation-text {
-            color: #6d7175;
-            margin-bottom: 1.5rem;
-            line-height: 1.5;
+        .product-actions {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border-light);
         }
 
         /* ====== Quick Actions ====== */
@@ -437,7 +399,7 @@
 
         .quick-btn {
             padding: 1rem;
-            background: white;
+            background: rgba(255, 255, 255, 0.1);
             color: var(--text);
             text-decoration: none;
             border-radius: var(--radius);
@@ -445,6 +407,7 @@
             border: 1px solid var(--border);
             text-align: center;
             font-weight: 500;
+            background: white;
         }
 
         .quick-btn:hover {
@@ -493,7 +456,7 @@
                 grid-template-columns: 1fr;
             }
             
-            .button-group {
+            .product-actions {
                 flex-direction: column;
             }
             
@@ -508,10 +471,6 @@
             }
             
             .product-card {
-                padding: 1.5rem;
-            }
-            
-            .confirmation-dialog {
                 padding: 1.5rem;
             }
         }
@@ -530,7 +489,7 @@
                     <a href="index.jsp" class="nav-link">Dashboard</a>
                     <a href="product-list.jsp" class="nav-link">Products</a>
                     <a href="product-form.jsp" class="nav-link">Add product</a>
-                    <a href="delete-product.jsp" class="nav-link active">Delete</a>
+                    <a href="find-product.jsp" class="nav-link active">Search</a>
                 </nav>
             </div>
         </header>
@@ -539,17 +498,15 @@
         <main class="main-content">
             <!-- Page Header -->
             <div class="page-header">
-                <h1 class="page-title">Delete Product</h1>
-                <p class="page-subtitle">Remove products from your catalog</p>
+                <h1 class="page-title">Find Product</h1>
+                <p class="page-subtitle">Search for any product in your catalog</p>
             </div>
 
             <%
                 String productId = request.getParameter("product_id");
-                String action = request.getParameter("action");
                 String message = null;
                 String messageType = null;
                 Product product = null;
-                boolean showConfirmation = false;
                 
                 if (productId != null && !productId.trim().isEmpty()) {
                     try {
@@ -557,35 +514,16 @@
                         product = productDao.findProductById(productId.trim());
                         
                         if (product != null) {
-                            if ("confirm".equals(action)) {
-                                // Perform deletion
-                                boolean deleted = productDao.deleteProductById(productId.trim());
-                                
-                                if (deleted) {
-                                    message = "Product '" + (product.getName() != null ? product.getName() : "Unnamed Product") + "' (ID: " + product.getId() + ") has been successfully deleted!";
-                                    messageType = "success";
-                                    product = null; // Clear product after deletion
-                                } else {
-                                    message = "Failed to delete product. Please try again.";
-                                    messageType = "error";
-                                }
-                            } else {
-                                // Show confirmation
-                                showConfirmation = true;
-                                message = "Product found. Please review the details before deletion.";
-                                messageType = "warning";
-                            }
+                            message = "Product found successfully!";
+                            messageType = "success";
                         } else {
                             message = "Product with ID '" + productId + "' not found!";
                             messageType = "error";
                         }
                     } catch (Exception e) {
-                        message = "Error processing request: " + e.getMessage();
+                        message = "Error searching for product: " + e.getMessage();
                         messageType = "error";
                     }
-                } else if ("confirm".equals(action)) {
-                    message = "Product ID is required for deletion.";
-                    messageType = "error";
                 }
             %>
 
@@ -593,50 +531,38 @@
             <div class="search-card">
                 <!-- Search Header -->
                 <div class="search-header">
-                    <div class="search-icon">🗑️</div>
-                    <h2 class="search-title">Delete Product</h2>
-                    <p class="search-subtitle">Enter a product ID to remove it from your catalog</p>
+                    <div class="search-icon">🔍</div>
+                    <h2 class="search-title">Search Products</h2>
+                    <p class="search-subtitle">Enter a product ID to find specific product details</p>
                 </div>
 
                 <!-- Display Messages -->
                 <% if (message != null) { %>
-                    <div class="message <%= 
-                        "success".equals(messageType) ? "success-message" : 
-                        "warning".equals(messageType) ? "warning-message" : "error-message" 
-                    %>">
-                        <span><%= "success".equals(messageType) ? "✅" : "warning".equals(messageType) ? "⚠️" : "❌" %></span>
+                    <div class="message <%= "success".equals(messageType) ? "success-message" : "error-message" %>">
+                        <span><%= "success".equals(messageType) ? "✅" : "❌" %></span>
                         <span><%= message %></span>
                     </div>
                 <% } %>
 
                 <!-- Search Form -->
-                <form method="get" action="delete-product.jsp">
+                <form method="get" action="find-product.jsp">
                     <div class="form-group">
                         <label for="product_id">Product ID</label>
                         <input type="text" name="product_id" id="product_id" class="form-control" 
                                placeholder="Enter product ID (e.g., PROD001)" 
-                               value="<%= productId != null ? productId : "" %>" 
-                               <%= showConfirmation ? "readonly" : "" %> required>
-                        <div class="help-text">Enter the unique identifier of the product you want to delete</div>
+                               value="<%= productId != null ? productId : "" %>" required>
+                        <div class="help-text">Enter the unique identifier of the product you want to find</div>
                     </div>
                     
-                    <% if (!showConfirmation) { %>
-                        <button type="submit" class="btn btn-primary">
-                            <span>🔍</span>
-                            Find Product
-                        </button>
-                    <% } else { %>
-                        <button type="button" class="btn btn-secondary" onclick="enableSearch()" style="width: 100%;">
-                            <span>✏️</span>
-                            Search Different Product
-                        </button>
-                    <% } %>
+                    <button type="submit" class="btn btn-primary">
+                        <span>🔍</span>
+                        Search Product
+                    </button>
                 </form>
             </div>
 
-            <!-- Product Details & Confirmation -->
-            <% if (product != null && showConfirmation) { %>
-                <!-- Product Details Card -->
+            <!-- Product Details (Visible when product is found) -->
+            <% if (product != null) { %>
                 <div class="product-card">
                     <!-- Product Header -->
                     <div class="product-header">
@@ -684,6 +610,24 @@
                         </div>
                         
                         <div class="product-field">
+                            <span class="field-label">Product Type</span>
+                            <span class="field-value">
+                                <span class="badge <%= product.isBundle() ? "badge-warning" : "badge-secondary" %>">
+                                    <%= product.isBundle() ? "Product Bundle" : "Single Product" %>
+                                </span>
+                            </span>
+                        </div>
+                        
+                        <div class="product-field">
+                            <span class="field-label">Visibility</span>
+                            <span class="field-value">
+                                <span class="badge <%= product.isCustomerVisible() ? "badge-success" : "badge-secondary" %>">
+                                    <%= product.isCustomerVisible() ? "Visible to Customers" : "Hidden from Customers" %>
+                                </span>
+                            </span>
+                        </div>
+                        
+                        <div class="product-field">
                             <span class="field-label">Created Date</span>
                             <span class="field-value">
                                 <%= product.getOrderDate() != null ? 
@@ -692,34 +636,19 @@
                             </span>
                         </div>
                     </div>
-                </div>
 
-                <!-- Confirmation Dialog -->
-                <div class="confirmation-dialog">
-                    <div class="confirmation-icon">⚠️</div>
-                    <h3 class="confirmation-title">Confirm Deletion</h3>
-                    <p class="confirmation-text">
-                        You are about to permanently delete this product from your catalog. 
-                        This action cannot be undone and all product data will be lost.
-                    </p>
-                    
-                    <div class="button-group">
-                        <form method="get" action="delete-product.jsp" style="flex: 1;">
-                            <input type="hidden" name="product_id" value="<%= product.getId() %>">
-                            <button type="submit" class="btn btn-secondary">
-                                <span>←</span>
-                                Cancel
-                            </button>
-                        </form>
-                        
-                        <form method="get" action="delete-product.jsp" style="flex: 1;">
-                            <input type="hidden" name="product_id" value="<%= product.getId() %>">
-                            <input type="hidden" name="action" value="confirm">
-                            <button type="submit" class="btn btn-danger">
-                                <span>🗑️</span>
-                                Delete Product
-                            </button>
-                        </form>
+                    <!-- Product Actions -->
+                    <div class="product-actions">
+                        <a href="update-product-form.jsp?product_id=<%= product.getId() %>" 
+                           class="btn btn-success" style="flex: 1;">
+                            <span>✏️</span>
+                            Edit Product
+                        </a>
+                        <a href="delete-product.jsp?product_id=<%= product.getId() %>" 
+                           class="btn btn-secondary" style="flex: 1;">
+                            <span>🗑️</span>
+                            Delete Product
+                        </a>
                     </div>
                 </div>
             <% } %>
@@ -734,13 +663,13 @@
                     <span style="display: block; font-size: 1.5rem; margin-bottom: 0.5rem;">📋</span>
                     View All
                 </a>
-                <a href="find-product.jsp" class="quick-btn">
-                    <span style="display: block; font-size: 1.5rem; margin-bottom: 0.5rem;">🔍</span>
-                    Find Product
-                </a>
                 <a href="index.jsp" class="quick-btn">
                     <span style="display: block; font-size: 1.5rem; margin-bottom: 0.5rem;">🏠</span>
                     Dashboard
+                </a>
+                <a href="javascript:location.reload()" class="quick-btn">
+                    <span style="display: block; font-size: 1.5rem; margin-bottom: 0.5rem;">🔄</span>
+                    Refresh
                 </a>
             </div>
         </main>
@@ -754,50 +683,48 @@
     </div>
 
     <script>
-        // Focus on input field when page loads
+        // Auto-focus search input
         document.addEventListener('DOMContentLoaded', function() {
-            const productIdInput = document.getElementById('product_id');
-            if (productIdInput && !productIdInput.readonly) {
-                productIdInput.focus();
+            const searchInput = document.getElementById('product_id');
+            if (searchInput) {
+                searchInput.focus();
                 
                 // Select all text if there's a value
-                if (productIdInput.value) {
-                    productIdInput.select();
+                if (searchInput.value) {
+                    searchInput.select();
                 }
             }
         });
-        
-        // Clear readonly attribute when user wants to search again
-        function enableSearch() {
-            const input = document.getElementById('product_id');
-            input.readOnly = false;
-            input.focus();
-            input.select();
-        }
 
-        // Add confirmation for delete action
+        // Add some interactive features
         document.addEventListener('DOMContentLoaded', function() {
-            const deleteForms = document.querySelectorAll('form[action="delete-product.jsp"]');
-            deleteForms.forEach(form => {
-                const deleteBtn = form.querySelector('.btn-danger');
-                if (deleteBtn) {
-                    deleteBtn.addEventListener('click', function(e) {
-                        if (!confirm('Are you absolutely sure you want to delete this product? This action cannot be undone.')) {
-                            e.preventDefault();
-                        }
-                    });
-                }
-            });
-
-            // Add input validation
+            const form = document.querySelector('form');
             const searchInput = document.getElementById('product_id');
+            
+            // Add input validation
             if (searchInput) {
                 searchInput.addEventListener('input', function() {
                     if (this.value.trim().length > 0) {
-                        this.style.borderColor = 'var(--danger)';
+                        this.style.borderColor = 'var(--primary)';
                     } else {
                         this.style.borderColor = 'var(--border)';
                     }
+                });
+            }
+            
+            // Add loading state to form submission
+            if (form) {
+                form.addEventListener('submit', function() {
+                    const submitBtn = this.querySelector('button[type="submit"]');
+                    const originalText = submitBtn.innerHTML;
+                    
+                    submitBtn.innerHTML = '<span>⏳</span> Searching...';
+                    submitBtn.disabled = true;
+                    
+                    setTimeout(function() {
+                        submitBtn.innerHTML = originalText;
+                        submitBtn.disabled = false;
+                    }, 2000);
                 });
             }
         });
